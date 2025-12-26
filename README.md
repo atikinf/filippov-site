@@ -1,6 +1,4 @@
-# Nikita Filippov - Personal Website
-
-## Getting Started
+# Personal site
 
 ```bash
 # Install dependencies
