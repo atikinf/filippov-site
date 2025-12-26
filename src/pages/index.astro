@@ -1,19 +1,21 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import Badge from '../components/Badge.astro';
+import photo from '../assets/photo.jpg';
 ---
 
 <Layout title="Nikita Filippov">
-  <main class="min-h-screen flex items-center justify-center px-8 md:px-20 lg:px-32 xl:px-48 py-20">
+  <main class="min-h-screen flex items-center justify-center py-16 px-8 md:px-20 lg:px-32 xl:px-48">
     <div class="max-w-4xl w-full">
       <!-- Main content card -->
       <div class="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
-        <!-- Bio -->
-        <div class="md:col-span-3 space-y-6 md:border-r md:border-dotted md:border-ink/20 md:pr-8">
+        <!-- Left col -->
+        <div class="md:col-span-3 space-y-6 md:border-r md:border-ink/10 md:pr-12">
           <div class="opacity-0 animate-fade-up animation-delay-100 text-center">
             <!-- Name tag sticker -->
-            <div class="nametag inline-block w-72 rounded-lg overflow-hidden shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+            <div id="nametag" class="nametag inline-block w-72 mb-2 rounded-lg overflow-hidden shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
               <!-- Red header -->
               <div class="bg-mondrian-red px-6 py-3 text-center">
                 <p class="text-white font-sans text-2xl font-bold tracking-wide uppercase leading-none">
@@ -32,11 +34,12 @@ import Badge from '../components/Badge.astro';
             </div>
           </div>
 
-          <div class="blurb opacity-0 animate-fade-up animation-delay-200 text-ink text-lg leading-relaxed space-y-4">
+          <div id="blurb" class="text-ink text-lg leading-relaxed space-y-4 opacity-0 animate-fade-up animation-delay-200">
             <p>
-              I'm currently in school at Seattle Central, taking courses in Engineering Physics and PoliSci. I previously received a CS degree and a math minor from <b>UW, Seattle</b>, where I also TAed and worked in labs. Then, I spent four years working at <Badge href="https://aws.amazon.com/iot-sitewise/" color="yellow">AWS</Badge> on the Internet of Things (IoT). Most recently, I've been a lead volunteer at the <Badge href="https://rootsinfo.org/" color="blue">Roots</Badge> young adult homeless shelter for about two years.
+              I'm currently in school at Seattle Central, taking courses in Engineering Physics and PoliSci. I previously received a CS degree and a math minor from UW, Seattle, where I also TA'd and worked in labs. Then, I spent four years working at <Badge href="https://aws.amazon.com/iot-sitewise/" color="yellow">AWS</Badge> on the Internet of Things. Most recently, I've been a lead volunteer at the <Badge href="https://rootsinfo.org/" color="blue">Roots</Badge> young adult homeless shelter for about two years.
             </p>
-            <p>  In my free time I try to practice my Russian, dabble in making things with CAD, 3D-printing, and woodworking, and like to <Badge href="https://app.thestorygraph.com/currently-reading/atikinf" color="green">read</Badge>. 
+            <p>
+              In my free time I try to practice my Russian, dabble in making things with CAD, 3D-printing, and woodworking, and like to <Badge href="https://app.thestorygraph.com/currently-reading/atikinf" color="green">Read</Badge>. 
             </p>
             <p>
               I enjoy learning about world history and keeping up with developments in space science and tech. 
@@ -52,7 +55,7 @@ import Badge from '../components/Badge.astro';
                 class="inline-flex items-center gap-2 px-5 py-2.5 border border-ink/20 text-ink font-sans text-sm rounded-full hover:border-ink/40 hover:bg-ink/5 transition-colors"
               >
                 <Icon name="simple-icons:github" class="w-4 h-4" />
-                github
+                GitHub
               </a>
               <a
                 href="https://www.linkedin.com/in/nikitafilippov/"
@@ -61,7 +64,7 @@ import Badge from '../components/Badge.astro';
                 class="inline-flex items-center gap-2 px-5 py-2.5 border border-ink/20 text-ink font-sans text-sm rounded-full hover:border-ink/40 hover:bg-ink/5 transition-colors"
               >
                 <Icon name="simple-icons:linkedin" class="w-4 h-4" />
-                linkedin
+                LinkedIn
               </a>
               <!-- <a
                 href="https://app.thestorygraph.com/currently-reading/atikinf"
@@ -76,27 +79,46 @@ import Badge from '../components/Badge.astro';
           </div>
         </div>
 
-        <!-- Photo -->
-        <div class="col-span-2 opacity-0 animate-fade-up">
+        <!-- Right col -->
+        <div class="md:col-span-2">
           <div class="relative max-w-[200px] md:max-w-none mx-auto">
-            <div class="relative aspect-[4/5] rounded-xl overflow-hidden bg-stone/10">
-              <img
-                src="/photo.jpg"
-                alt="Nikita Filippov"
-                class="w-full h-full object-cover"
+            <div class="relative aspect-[4/5] rounded-xl overflow-hidden">
+              <Image
+                src={photo}
+                alt="Man in front of a field of flowers"
+                class="w-full h-full object-cover text-transparent opacity-0 transition-opacity duration-1000 ease-out"
+                id="headshot"
+                loading="eager"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Subtle footer -->
-      <footer class="mt-24 pt-8 border-t border-ink/10 opacity-0 animate-fade-up animation-delay-300">
-        <p class="text-ink/50 text-sm font-sans text-center">
-          © {new Date().getFullYear()} Nikita Filippov - Astro + Tailwind CSS, via github pages
+      <footer class="mt-12 md:mt-24 pt-8 border-t border-ink/10 text-ink/50 text-sm font-sans text-center space-y-2 opacity-0 animate-fade-up animation-delay-300">
+        <p>
+          Astro + Tailwind CSS, via github pages
+        </p>
+        <p>
+          © {new Date().getFullYear()} Nikita Filippov
         </p>
       </footer>
     </div>
   </main>
 </Layout>
 
+<script>
+  // Image fade-in on load
+  const img = document.getElementById('headshot') as HTMLImageElement;
+  
+  function fadeIn() {
+    img.classList.remove('opacity-0');
+    img.classList.add('opacity-100');
+  }
+  
+  if (img.complete) {
+    fadeIn();
+  } else {
+    img.addEventListener('load', fadeIn);
+  }
+</script>
