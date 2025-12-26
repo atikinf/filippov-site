@@ -1,0 +1,30 @@
+---
+interface Props {
+  href?: string;
+  color?: 'blue' | 'yellow' | 'red' | 'green' | 'black';
+}
+
+const { href, color = 'blue' } = Astro.props;
+
+const colorClasses = {
+  blue: 'bg-mondrian-blue',
+  yellow: 'bg-mondrian-yellow',
+  red: 'bg-mondrian-red',
+  green: 'bg-mondrian-green',
+  black: 'bg-ink',
+};
+
+const dotColor = colorClasses[color];
+const Tag = href ? 'a' : 'span';
+const linkProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<!-- Reusable inline dotted badge link -->
+<Tag
+  {...linkProps}
+  class="inline-flex items-baseline gap-1.5 px-1.5 py-px text-base border border-ink/20 rounded-md no-underline hover:border-ink/40 hover:bg-ink/5 transition-colors align-baseline"
+>
+  <span class:list={['w-2 h-2 rounded-full self-center', dotColor]}></span>
+  <slot />
+</Tag>
+
