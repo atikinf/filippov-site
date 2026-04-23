@@ -1,4 +1,25 @@
-/* Global styles */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: Fraunces, Georgia, serif;
+  --font-handwritten: Caveat, cursive;
+
+  --color-cream: #FAF7F2;
+  --color-ink: #1a1a1a;
+  --color-stone: #6B6B6B;
+  --color-accent: #D4A574;
+
+  --color-mondrian-blue: #0051BA;
+  --color-mondrian-yellow: #FACA00;
+  --color-mondrian-red: #DD0100;
+  --color-mondrian-black: #000000;
+  --color-mondrian-white: #FFFFFF;
+  --color-mondrian-gray: #8C8C8C;
+  --color-mondrian-navy: #003366;
+  --color-mondrian-orange: #FF6600;
+  --color-mondrian-green: #006B3C;
+}
 
 html {
   scroll-behavior: smooth;
@@ -30,5 +51,3 @@ html {
 .animation-delay-300 {
   animation-delay: 0.3s;
 }
-
-
